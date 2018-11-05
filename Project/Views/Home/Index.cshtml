@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@*<a asp-controller="Home" asp-action="Index">dada</a>*@
+
+<a asp-controller="Home" asp-action="Index" asp-route-urlTitle="dada" asp-route-amp="amp" asp-route-language="cn">amp language</a>
+<a asp-controller="Home" asp-action="Index" asp-route-urlTitle="dada" asp-route-amp="amp">amp</a>
+<a asp-controller="Home" asp-action="Index" asp-route-urlTitle="dada" asp-route-language="cn">language</a>
+<a asp-controller="Home" asp-action="Index" asp-route-urlTitle="dada">no</a>
+
+
+<a asp-route="about" asp-all-route-data="@(new Dictionary<string, string>
+            {
+                { "age", "11" },
+                { "language", "cn" },
+                { "currentYear", "true" }
+            })">no</a>
+
+<a asp-route="about" asp-route-age="11" asp-route-language="cn" asp-route-currentYear="true" >no</a>
+
+
+
+home page
+@*<a asp-controller="Home" asp-action="Index" asp-route-urlTitle="dada">no</a>*@
+
+
