@@ -1,18 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 
 namespace Project
 {
+  
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -25,23 +30,60 @@ namespace Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.Configure<CookiePolicyOptions>(options =>
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.None;
+            //});
+
+            services.Configure<RazorViewEngineOptions>(options =>
             {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
+                options.ViewLocationExpanders.Add(new FeatureLocationExpander());
             });
 
-            services.AddRouting(c => {
-                c.AppendTrailingSlash = false;
-                c.LowercaseUrls = true;
+            //services.Configure<RouteOptions>(options =>
+            //{
+            //    options.AppendTrailingSlash = false;
+            //    options.LowercaseUrls = true;
+            //});  
+
+            services.AddLocalization();
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("zh-Hans") };
+
+                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+                options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(context =>
+                {
+                    return Task.FromResult(new ProviderCultureResult("zh-Hans"));
+                    //var uriBuilder = new UriBuilder(context.Request.GetDisplayUrl());
+                    //var firstSegment = uriBuilder.Path.Split('/').ToList().ElementAt(1);
+                    //var language = languageOptions.SupportedLanguages.SingleOrDefault(s => s.ShortFriendlyName == firstSegment) ?? languageOptions.DefaultLanguage;
+                    //return Task.FromResult(new ProviderCultureResult(language.ISOCode));
+                }));
             });
+
+            services.AddMvc()
+              .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder)
+              .AddDataAnnotationsLocalization();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            IApplicationBuilder app, 
+            IHostingEnvironment env,
+            IServiceProvider serviceProvider
+        )
         {
+            app.UseRequestLocalization(serviceProvider.GetService<IOptions<RequestLocalizationOptions>>().Value);
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -54,10 +96,11 @@ namespace Project
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            app.UseCookiePolicy();
+            //app.UseCookiePolicy();
+
 
             app.UseMvc(routes =>
-            { 
+            {
                 routes.MapRoute(
                   name: "home",
                   template: "",
@@ -65,63 +108,44 @@ namespace Project
                 );
 
                 routes.MapRoute(
-                    name: "about",
-                    template: "about/{language}",
-                    defaults: new { language = "en", controller = "Home", Action = "About" }
+                     name: "about",
+                     template: "about",
+                     defaults: new { controller = "About", Action = "Index" }
                 );
 
-                //routes.MapRoute(
-                //  name: "default5",
-                //  template: "{controller?}/{urlTitle?}",
-                //  defaults: new { amp = "", language = "en", controller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //   name: "default4",
-                //   template: "{language:regex(^en|cn$)}/{controller?}/{urlTitle?}",
-                //   defaults: new { amp = "", controller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //    name: "default9",
-                //    template: "{amp:regex(^amp$)}/{controller?}/{urlTitle?}",
-                //    defaults: new { language = "en", controller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //     name: "default6",
-                //     template: "{amp:regex(^amp$)}/{language:regex(^en|cn$)}/{controller?}/{urlTitle?}",
-                //     defaults: new { controller = "Home", Action = "Index" }
-                //);
-
-
-
-                //routes.MapRoute(
-                //    name: "default1",
-                //    template: "{amp:regex(^amp$)}/{language:regex(^en|cn$)}/{controller?}/{urlTitle?}",
-                //    defaults: new { contoller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //    name: "default2",
-                //    template: "{amp:regex(^amp$)}/{language:regex(^en|cn$)?}/{controller?}/{urlTitle?}",
-                //    defaults: new { language = "en", controller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //    name: "default3",
-                //    template: "{language:regex(^en|cn$)}/{controller?}/{urlTitle?}",
-                //    defaults: new { controller = "Home", Action = "Index" }
-                //);
-
-                //routes.MapRoute(
-                //  name: "default4",
-                //  template: "{controller?}/{urlTitle?}",
-                //  defaults: new { language = "en", controller = "Home", Action = "Index" }
-                //);
-
-
+                routes.MapRoute(
+                 name: "category",
+                 template: "{category}",
+                 defaults: new { controller = "About", Action = "Index", category = "category1" }
+               );
             });
         }
+    }
+
+    public class FeatureLocationExpander : IViewLocationExpander
+    {
+        public void PopulateValues(ViewLocationExpanderContext context)
+        {
+            // Don't need anything here, but required by the interface
+        }
+
+        public IEnumerable<string> ExpandViewLocations(ViewLocationExpanderContext context, IEnumerable<string> viewLocations)
+        {
+
+            // {0} - Action Name
+            // {1} - Controller Name
+            // {2} - Area Name            
+            return new string[] {
+                "/Web/{1}/{0}.cshtml",
+                "/Web/Shared/{0}.cshtml"
+            };
+
+            // 我们废除 area 了
+            //return new string[] {
+            //    "/{2}/{1}/{0}.cshtml",
+            //    "/{2}/Shared/{0}.cshtml"
+            //};
+        }
+
     }
 }
