@@ -2318,6 +2318,11 @@ html-entities@^1.2.0:
   resolved "https://registry.yarnpkg.com/html-entities/-/html-entities-1.2.1.tgz#0df29351f0721163515dfb9e5543e5f6eed5162f"
   integrity sha1-DfKTUfByEWNRXfueVUPl9u7VFi8=
 
+html-inline-css-webpack-plugin@^1.3.2:
+  version "1.3.2"
+  resolved "https://registry.yarnpkg.com/html-inline-css-webpack-plugin/-/html-inline-css-webpack-plugin-1.3.2.tgz#40ce776a6c308d69d6be0b7daf32168291a6999f"
+  integrity sha512-21qamuQRYoj16TAlOFI6bc7LWRzRQ1mNaRbcZ6/84usKTwXadhUNY7SGR7aTH6zIUkJmzFtXrbTxjy52oBmz9Q==
+
 html-loader@^0.5.5:
   version "0.5.5"
   resolved "https://registry.yarnpkg.com/html-loader/-/html-loader-0.5.5.tgz#6356dbeb0c49756d8ebd5ca327f16ff06ab5faea"

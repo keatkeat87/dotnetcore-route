@@ -80,7 +80,13 @@ namespace Project.Web.Home
             //    }
             //});
 
-            return View();
+            if(string.IsNullOrEmpty(amp)){
+                return View();
+            }
+            else{
+                return View("./Amp/Index.cshtml");
+            }
+
         }
 
         

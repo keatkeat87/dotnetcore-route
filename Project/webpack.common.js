@@ -3,10 +3,13 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // create index.html
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // split out css 
 const webpack = require('webpack');
+const HTMLInlineCSSWebpackPlugin = require("html-inline-css-webpack-plugin").default;
+ 
 //  const InlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
 const entryPaths = [
-    'Web/Home/home.ts'
+    'Web/Home/home.ts',
+    'Web/Home/Amp/home.ts'
 ];
 
 const componentPaths = [
@@ -70,6 +73,8 @@ module.exports = {
             filename: '[name].[contenthash].css',
             chunkFilename: '[name].[contenthash].css'
         }),
+        new HtmlWebpackPlugin(),
+        new HTMLInlineCSSWebpackPlugin(),
         new webpack.ProvidePlugin({
             jQuery: 'jquery',
             'window.jQuery': 'jquery'
@@ -117,16 +122,23 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.css$/,
-                use: [{
-                    loader: process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                }, {
-                    loader: 'css-loader',
-                    options: {
-                        sourceMap: true
-                    }
-                }]
+              test: /\.css$/,
+              use: [
+                MiniCssExtractPlugin.loader,
+                "css-loader"
+              ]
             },
+            // {
+            //     test: /\.css$/,
+            //     use: [{
+            //         loader: process.env.NODE_ENV === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
+            //     }, {
+            //         loader: 'css-loader',
+            //         options: {
+            //             sourceMap: true
+            //         }
+            //     }]
+            // },
             {
                 test: /\.scss$/,
                 use: [{

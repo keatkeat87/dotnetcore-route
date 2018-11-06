@@ -1,0 +1,8 @@
+@{
+    Layout = "~/Web/Shared/Amp/Index.cshtml";
+}
+@section Css{
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1) {htmlWebpackPlugin.files.chunks[chunk].css.forEach(function(css){ %><link href="<%= css %>" rel="stylesheet"><%})}} %>
+}
+
+<h1>Hello AMP</h1>
