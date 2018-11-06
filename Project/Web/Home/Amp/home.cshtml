@@ -1,7 +1,16 @@
 @{
     Layout = "~/Web/Shared/Amp/Index.cshtml";
 }
+
+
 @section Css{
-    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1) {htmlWebpackPlugin.files.chunks[chunk].css.forEach(function(css){ %><link href="<%= css %>" rel="stylesheet"><%})}} %>
-}
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1) {htmlWebpackPlugin.files.chunks[chunk].css.forEach(function(css){ %><style amp-custom="" ><%=compilation.assets[css.split('/').pop()].source()%></style><%})}} %>}
+
+
+<!-- <span> <%= JSON.stringify(compilation.assets)  %> </span> -->
+<!-- compilation.assets[css.split('/').pop()].children[0]._value -->
+<!-- JSON.stringify(compilation.assets) -->
+<!-- JSON.stringify(htmlWebpackPlugin.files.chunks[chunk].css) -->
+
+
 <h1>Hello AMP</h1>
