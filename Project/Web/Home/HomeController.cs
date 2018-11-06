@@ -84,7 +84,7 @@ namespace Project.Web.Home
                 return View();
             }
             else{
-                return View("./Amp/Index.cshtml");
+                return View("~/Web/Home/Amp/Index.cshtml");
             }
 
         }
