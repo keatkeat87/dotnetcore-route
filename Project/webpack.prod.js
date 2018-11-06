@@ -5,7 +5,7 @@ const webpack = require('webpack');
 
 module.exports = merge(common, {
     mode: "production",
-    devtool: "source-map",
+    // devtool: "source-map",
     plugins: [
         // tree share and 压缩 执行 webpack -p 更好
         //  new UglifyJSPlugin({
