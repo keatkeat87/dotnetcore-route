@@ -117,52 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Best Way Transport specialises in providing door-to-door transport services between Singapore and Malaysia. Safe, convenient and hassle-free, you can expect to clear immigration without alighting from the vehicle! Whether you need transport for a work event or a leisure trip to Legoland, fishing in Mersing or shopping at JPO, we have just the right driver and vehicle for you." xml:space="preserve">
-    <value>Best Way Transport 是一家提供往返新加坡和马来西亚专车接送服务的公司。有了我们专业的司机和舒适的车队，您将会享有一个安全及便利的旅程。我们的服务包括专属司机到您的附上接您，而整个通关的过程您也无需下车办理出入境的手续。无论您是想去乐高乐园游玩，到丰盛港钓鱼或在JPO购物，我们都有适合您的服务和车辆。</value>
+  <data name="&lt;p&gt;test html with {0}&lt;/p&gt;" xml:space="preserve">
+    <value>&lt;p&gt;测试 html 和参数 {0}&lt;/p&gt;</value>
   </data>
-  <data name="Call Us On" xml:space="preserve">
-    <value>致电我们</value>
+  <data name="&lt;p&gt;test html&lt;/p&gt;" xml:space="preserve">
+    <value>&lt;p&gt;测试 html&lt;/p&gt;</value>
   </data>
-  <data name="From" xml:space="preserve">
-    <value>从</value>
+  <data name="test" xml:space="preserve">
+    <value>测试</value>
   </data>
-  <data name="Interested to find out more about the exciting vacation spots in Singapore and Malaysia?" xml:space="preserve">
-    <value>有兴趣了解更多关于新加坡和马来西亚的度假景点吗？</value>
-  </data>
-  <data name="Latest Blog" xml:space="preserve">
-    <value>最新的部落格</value>
-  </data>
-  <data name="Online Booking" xml:space="preserve">
-    <value>在线预订</value>
-  </data>
-  <data name="or" xml:space="preserve">
-    <value>或</value>
-  </data>
-  <data name="Our Services" xml:space="preserve">
-    <value>我们的服务配套</value>
-  </data>
-  <data name="Passengers" xml:space="preserve">
-    <value>乘客</value>
-  </data>
-  <data name="Singapore to Malaysia" xml:space="preserve">
-    <value>往返新加坡和马来西亚</value>
-  </data>
-  <data name="Testimonials" xml:space="preserve">
-    <value>顾客好评</value>
-  </data>
-  <data name="View Packages" xml:space="preserve">
-    <value>服务配套</value>
-  </data>
-  <data name="We have a whole range of packages for all your transport needs. We can also provide customisation for your trips." xml:space="preserve">
-    <value>我们为您提供了一系列的接送服务，也可以按照您的需求特制包车的行程。</value>
-  </data>
-  <data name="We specialise in providing door-to-door transport services between Singapore and Malaysia. Safe, convenient and hassle-free, you can expect to clear immigration without alighting from the vehicle! Whether you need transport for a work or leisure trip, we have just the right driver and vehicle for you." xml:space="preserve">
-    <value>Best Way Transport 拥有一组全职的专业司机和齐全的车队为您提供安全以及舒适的接送和包车服务，让您可以很便利的往返新加坡和马来西亚。</value>
-  </data>
-  <data name="&lt;div&gt;Hello&lt;/div&gt;&lt;i&gt; {0}&lt;/i&gt;" xml:space="preserve">
-    <value>&lt;div&gt;wtf&lt;/div&gt;&lt;i&gt; {0}&lt;/i&gt;</value>
-  </data>
-  <data name="&lt;i&gt;Hello&lt;/i&gt; &lt;div&gt;{0}!&lt;/div&gt;1" xml:space="preserve">
-    <value>&lt;i&gt;Bonjour&lt;/i&gt; &lt;div&gt;{0} !&lt;/div&gt;</value>
+  <data name="test {0} with params" xml:space="preserve">
+    <value>测试 {0} 与参数</value>
   </data>
 </root>

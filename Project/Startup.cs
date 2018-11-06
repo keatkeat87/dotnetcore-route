@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,15 +11,17 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationModels;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Project.Module.Language;
+using Project.Module.Amp;
 
 namespace Project
-{
-  
+{ 
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -31,58 +35,43 @@ namespace Project
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            //services.Configure<CookiePolicyOptions>(options =>
-            //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
-            //    options.MinimumSameSitePolicy = SameSiteMode.None;
-            //});
-
             services.Configure<RazorViewEngineOptions>(options =>
             {
                 options.ViewLocationExpanders.Add(new FeatureLocationExpander());
             });
 
-            //services.Configure<RouteOptions>(options =>
-            //{
-            //    options.AppendTrailingSlash = false;
-            //    options.LowercaseUrls = true;
-            //});  
 
-            services.AddLocalization();
-            services.Configure<RequestLocalizationOptions>(options =>
+            services.AddAmp();
+            services.AddLanguage(options =>
             {
-                var supportedCultures = new List<CultureInfo> { new CultureInfo("en"), new CultureInfo("zh-Hans") };
-
-                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
-                options.RequestCultureProviders.Insert(0, new CustomRequestCultureProvider(context =>
+                options.DefaultLanguage = new Language
                 {
-                    return Task.FromResult(new ProviderCultureResult("zh-Hans"));
-                    //var uriBuilder = new UriBuilder(context.Request.GetDisplayUrl());
-                    //var firstSegment = uriBuilder.Path.Split('/').ToList().ElementAt(1);
-                    //var language = languageOptions.SupportedLanguages.SingleOrDefault(s => s.ShortFriendlyName == firstSegment) ?? languageOptions.DefaultLanguage;
-                    //return Task.FromResult(new ProviderCultureResult(language.ISOCode));
-                }));
+                    ISOCode = "zh-Hans",
+                    FriendlyISOCode = "中文"
+                };
+                options.SupportedLanguages = new List<Language> {
+                    new Language {
+                        ISOCode = "en",
+                        FriendlyISOCode = "english"
+                    },
+                    new Language {
+                        ISOCode = "zh-Hans",
+                        FriendlyISOCode = "中文"
+                    }
+                };
             });
-
-            services.AddMvc()
-              .AddViewLocalization(LanguageViewLocationExpanderFormat.SubFolder)
-              .AddDataAnnotationsLocalization();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(
-            IApplicationBuilder app, 
+            IApplicationBuilder app,
             IHostingEnvironment env,
             IServiceProvider serviceProvider
         )
         {
-            app.UseRequestLocalization(serviceProvider.GetService<IOptions<RequestLocalizationOptions>>().Value);
+            app.UseLanguage(serviceProvider);
 
             if (env.IsDevelopment())
             {
@@ -96,28 +85,94 @@ namespace Project
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-            //app.UseCookiePolicy();
-
 
             app.UseMvc(routes =>
             {
+                //routes.MapRoute(
+                //    name: "aboutWithLanguage",
+                //    template: "{language:language}/about-us",
+                //    defaults: new { Controller = "Category", Action = "Index" }
+                //);
+
+                //routes.MapRoute(
+                //    name: "about",
+                //    template: "about-us",
+                //    defaults: new { language = "zh-Hans", Controller = "Category", Action = "Index" }
+                //);
+
+                //routes.MapRoute(
+                //    name: "home",
+                //    template: "",
+                //    defaults: new { Controller = "Home", Action = "Index" }
+                // );
+
+                 
                 routes.MapRoute(
-                  name: "home",
-                  template: "",
-                  defaults: new { controller = "Home", Action = "Index" }
+                   name: "AboutWithLanguageAmp",
+                   template: "{amp:amp}/{language:language}/about-us",
+                   defaults: new { Controller = "AboutUs", Action = "Index" }
                 );
 
                 routes.MapRoute(
-                     name: "about",
-                     template: "about",
-                     defaults: new { controller = "About", Action = "Index" }
+                    name: "AboutWithLanguage",
+                    template: "{language:language}/about-us",
+                    defaults: new { Controller = "AboutUs", Action = "Index" }
                 );
 
                 routes.MapRoute(
-                 name: "category",
-                 template: "{category}",
-                 defaults: new { controller = "About", Action = "Index", category = "category1" }
-               );
+                    name: "AboutWithAmp",
+                    template: "{amp:amp}/about-us",
+                    defaults: new { Controller = "AboutUs", Action = "Index" }
+                );
+
+                routes.MapRoute(
+                    name: "About",
+                    template: "about-us",
+                    defaults: new { Controller = "AboutUs", Action = "Index" }
+                );
+
+                routes.MapRoute(
+                    name: "HomeWithLanguageAmp",
+                    template: "{amp:amp}/{language:language}",
+                    defaults: new { Controller = "Home", Action = "Index" }
+                );
+
+                routes.MapRoute(
+                    name: "HomeWithLanguage",
+                    template: "{language:language}",
+                    defaults: new { Controller = "Home", Action = "Index" }
+                );
+
+                routes.MapRoute(
+                   name: "HomeWithAmp",
+                   template: "{amp:amp}",
+                   defaults: new { Controller = "Home", Action = "Index" }
+                );
+                routes.MapRoute(
+                    name: "Home",
+                    template: "",
+                    defaults: new { Controller = "Home", Action = "Index" }
+                );
+
+
+
+                //routes.MapRoute(
+                //  name: "home",
+                //  template: "",
+                //  defaults: new { controller = "Home", Action = "Index" }
+                //);
+
+                //routes.MapRoute(
+                //     name: "about",
+                //     template: "about",
+                //     defaults: new { controller = "About", Action = "Index" }
+                //);
+
+                //routes.MapRoute(
+                //    name: "category",
+                //    template: "{category}",
+                //    defaults: new { controller = "About", Action = "Index", category = "category1" }
+                //);
             });
         }
     }

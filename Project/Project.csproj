@@ -6,12 +6,21 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
+    <None Remove="Web\Home\home.ts" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="Web\About\Index.cshtml">
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Localization" Version="2.1.1" />
+    <PackageReference Include="NodaTime" Version="2.4.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Web\Home\home.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Web\AboutUs\Index.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
     <Content Update="Web\Contact\Index.cshtml">

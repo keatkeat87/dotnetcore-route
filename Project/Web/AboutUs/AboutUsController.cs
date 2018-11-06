@@ -8,21 +8,21 @@ using System.Threading;
 
 namespace Project.Web.Home
 {
-    public class AboutController : Controller
+    public class AboutUsController : Controller
     {
         #region DI
         
 
 
-        public AboutController(
+        public AboutUsController(
              
         )
         {
            
         }
         #endregion
-         
-        public IActionResult Index([FromQuery] string value)
+                
+        public IActionResult Index([FromRoute] string language, [FromRoute] string amp)
         {
              
             return View();

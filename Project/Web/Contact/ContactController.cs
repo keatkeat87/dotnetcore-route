@@ -8,7 +8,7 @@ using System.Threading;
 
 namespace Project.Web.Home
 {
-    [Route("contact")]
+    //[Route("contact")]
     public class ContactController : Controller
     {
         #region DI
@@ -23,7 +23,7 @@ namespace Project.Web.Home
         }
         #endregion
          
-        [Route("{contactPath=what}", Name = "contact")]
+        //[Route("{contactPath=what}", Name = "contact")]
         public IActionResult Index([FromRoute] string contactPath)
         {
              

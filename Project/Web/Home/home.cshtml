@@ -1,0 +1,26 @@
+﻿
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Localization
+
+@inject IViewLocalizer ViewLocalizer
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var requestCulture = HttpContextAccessor.HttpContext.Features.Get<IRequestCultureFeature>();
+}
+
+@requestCulture.RequestCulture.Culture.Name
+
+  home page
+
+@ViewLocalizer["<p>test html with {0}</p>", "<div>123</div>"]
+
+
+@section Css{
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1) {htmlWebpackPlugin.files.chunks[chunk].css.forEach(function(css){ %><link href="<%= css %>" rel="stylesheet"><%})}} %>
+}
+@section Scripts{
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1) { if(htmlWebpackPlugin.files.chunks[chunk].entry.indexOf('runtime~') !== -1) {         %>
+    <script><%= compilation.assets[htmlWebpackPlugin.files.chunks[chunk].entry.split('/').pop()].source() %></script><% } else {%>
+    <script src="<%= htmlWebpackPlugin.files.chunks[chunk].entry %>"></script><% }}} %>
+
+}

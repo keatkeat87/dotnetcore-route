@@ -1,0 +1,13 @@
+﻿
+
+ 参考 :
+ https://support.google.com/webmasters/answer/189077?hl=zh-Hans 
+ https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes 语言 
+ http://unicode.org/iso15924/iso15924-codes.html 语言, 中文简体，繁体
+ https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2 国家 
+
+ Rule : 
+ 我们没有做 country, 只做语言
+
+
+

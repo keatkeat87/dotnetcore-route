@@ -1,0 +1,452 @@
+@import '../module/stooges-variables';
+@import '../module/stooges-mixin';
+@import './project-mixin';
+@import './project-variables';
+
+
+[class*='flaticon-']:before{
+    display: inline-block;
+font-family: "Flaticon";
+font-style: normal;
+font-weight: normal;
+font-variant: normal;
+line-height: 1;
+text-decoration: inherit;
+text-rendering: optimizeLegibility;
+text-transform: none;
+-moz-osx-font-smoothing: grayscale;
+-webkit-font-smoothing: antialiased;
+font-smoothing: antialiased;
+}
+
+.flaticon-next:before { content: "\f100"; }
+.flaticon-left-arrow:before { content: "\f101"; }
+.flaticon-up-arrow:before { content: "\f102"; }
+.flaticon-quote:before { content: "\f103"; }
+.flaticon-right-quote-sign:before { content: "\f104"; }
+.flaticon-add-button:before { content: "\f105"; }
+.flaticon-minus-sign-inside-a-black-circle:before { content: "\f106"; }
+.flaticon-placeholder:before { content: "\f107"; }
+.flaticon-phone-call:before { content: "\f108"; }
+.flaticon-e-mail-envelope:before { content: "\f109"; }
+.flaticon-whatsapp-logo:before { content: "\f10a"; }
+.flaticon-group:before { content: "\f10b"; }
+.flaticon-calendar-with-spring-binder-and-date-blocks:before { content: "\f10c"; }
+.flaticon-quill-drawing-a-line:before { content: "\f10d"; }
+.flaticon-menu:before { content: "\f10e"; }
+.flaticon-language:before { content: "\f10f"; }
+.flaticon-spinner-of-dots:before { content: "\f110"; }
+.flaticon-facebook-logo-button:before { content: "\f111"; }
+
+.overflow-auto {
+    overflow: auto
+}
+
+.justify-center {
+    justify-content: center
+}
+
+.border-top {
+    border-top-style: solid;
+    border-top-width: 1px;
+}
+
+.ck {
+    * {
+        line-height: 1.25;
+    }
+}
+
+.mxnr {
+    margin-left: -$space-1;
+    margin-right: -$space-1;
+}
+
+.pr {
+    padding: $space-1;
+}
+
+@media #{$breakpoint-up-lg} {
+    .mxnr {
+        margin-left: -$space-2;
+        margin-right: -$space-2;
+    }
+
+    .pr {
+        padding: $space-2;
+    }
+}
+
+@media #{$breakpoint-only-sm} {
+    .sm-flex {
+        display: flex
+    }
+    h1, .h1 {
+        font-size: 1.5rem;
+    }
+
+    h2, .h2 {
+        font-size: 1.75rem;
+    }
+}
+
+@media #{$breakpoint-only-md} {
+    .md-flex {
+        display: flex
+    }
+}
+
+@media #{$breakpoint-only-lg} {
+    .lg-flex {
+        display: flex
+    }
+}
+
+address {
+    font-style: normal;
+}
+
+[class^='btn-'] {
+    font-family: $font-family-1;
+    color: white;
+    border-radius: 3px;
+    border: none;
+    display: block;
+    outline: none;
+    line-height: 1;
+    cursor: pointer;
+    text-align: center;
+    font-weight: 300;
+    position: relative;
+
+    &.disabled {
+        color: $font-color-4;
+
+        &:after {
+            content: '';
+            position: absolute;
+            z-index: 1;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            cursor: not-allowed;
+        }
+    }
+}
+
+.btn-primary {
+    background: $color-main;
+
+    &:hover:not(.disabled),
+    &.active:not(.disabled) {
+        background: darken($color-main, 5%);
+        color: white;
+    }
+}
+
+.breadcrumb {
+    padding: $space-8 $space-1;
+    background-image: url('../images/packageBg.jpg');
+    background-size: cover;
+    text-align: center;
+
+    @media #{$breakpoint-down-md} {
+        padding: $space-4 $space-1;
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: normal;
+        font-family: $font-family-2;
+
+        @media #{$breakpoint-only-xs} {
+            font-size: 24px;
+        }
+    }
+
+    .line {
+        margin: $space-2 auto;
+        width: 100px;
+        height: 2px;
+        background: $color-main;
+    }
+
+    .links {
+        .slash {
+            padding: 0 4px;
+        }
+    }
+}
+
+.bookingGuide {
+    .flexBox {
+        background: $color-1;
+        padding: $space-4 $space-3;
+        color: white;
+        display: flex;
+        justify-content: space-between;
+
+        @media #{$breakpoint-down-md} {
+            justify-content: inherit;
+            flex-direction: column;
+            text-align: center;
+            padding: $space-3 $space-2;
+
+            p {
+                margin-bottom: $space-2;
+            }
+
+            a {
+                width: 200px;
+                margin: auto;
+            }
+        }
+
+        p {
+            display: flex;
+            align-items: center;
+            font-size: 20px;
+            font-family: $font-family-2;
+        }
+
+        a {
+            @include button();
+        }
+    }
+}
+
+.sideBlog {
+    border-left: 1px solid $color-basic-1;
+    position: relative;
+    padding-left: $space-4;
+
+    @media #{$breakpoint-only-xs} {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    &:before {
+        @media #{$breakpoint-only-xs} {
+            width: 100px;
+            height: 2px;
+            top: 50px;
+            left: 0;
+        }
+
+        content: "";
+        position: absolute;
+        width: 2px;
+        height: 48px;
+        background: $color-main;
+        top: 0;
+        left: -1px;
+    }
+
+    p.title {
+        padding: 12px 0;
+        margin-bottom: $space-3;
+        font-size: 20px;
+        font-family: $font-family-2;
+        font-weight: normal;
+    }
+
+    a {
+        display: flex;
+        margin-bottom: $space-2;
+        color: $font-color-1;
+
+        &:hover {
+            opacity: 0.9;
+        }
+
+        .image {
+            flex: 70px 0 0;
+
+            img {
+                width: 70px;
+                height: 70px;
+                object-fit: cover;
+            }
+        }
+
+        p {
+            margin-left: $space-2;
+
+            span.title {
+                @include ellipsis(2, 1.5, 14px);
+                font-family: $font-family-2;
+                display: block;
+            }
+
+            span.date {
+                display: block;
+                margin-top: $space-1;
+                color: $font-color-2;
+            }
+        }
+    }
+}
+
+.step1-3 {
+    padding: $space-3 0;
+    position: relative;
+
+    @for $i from 1 through 3 {
+        &.active-#{$i} {
+            .number-text {
+                &:nth-of-type(#{$i}) {
+                    .number {
+                        background: $color-main;
+                    }
+                }
+            }
+        }
+    }
+
+    .flexBox {
+        display: flex;
+        position: relative;
+
+        .number-text {
+            flex: 33%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: $font-family-2;
+
+            .number {
+                width: 80px;
+                height: 80px;
+                line-height: 50px;
+                vertical-align: middle;
+                text-align: center;
+                border-radius: 50%;
+                background: $color-1;
+                color: white;
+                font-size: 18px;
+                border: 15px solid white;
+
+                @media #{$breakpoint-only-xs} {
+                    width: 55px;
+                    height: 55px;
+                    line-height: 35px;
+                    font-size: 14px;
+                    border: 10px solid #fff;
+                }
+            }
+
+            .text {
+                //do nothing
+            }
+        }
+    }
+
+    .line {
+        position: absolute;
+        height: 1px;
+        background: $color-basic-2;
+        top: 38px;
+        left: 8px;
+        width: calc(100% - 16px);
+
+        @media #{$breakpoint-up-lg} {
+            left: 16px;
+            width: calc(100% - 32px);
+        }
+
+        @media #{$breakpoint-only-xs} {
+            top: 28px;
+        }
+    }
+}
+
+.bookingStep1Form {
+    background: $color-1;
+
+    .title {
+        font-size: 16px;
+        color: white;
+        font-weight: normal;
+        padding: $space-3;
+        background: $color-main;
+        position: relative;
+        text-align: center;
+
+        &:before {
+            content: '';
+            position: absolute;
+            left: calc(50% - 15px);
+            bottom: -15px;
+            border-top: 15px solid $color-main;
+            border-right: 15px solid transparent;
+            border-left: 15px solid transparent;
+        }
+    }
+
+    form {
+        @include form();
+        padding: $space-3;
+
+        input {
+            margin-bottom: $space-2;
+        }
+
+        label {
+            padding-right: 8px;
+        }
+
+        button {
+            display: inline-block;
+
+            &[name="whatsApp"] {
+                background: #34af23;
+
+                &:hover {
+                    background: none;
+                }
+
+                @media #{$breakpoint-up-lg} {
+                    display: none;
+                }
+            }
+
+            @media #{$breakpoint-down-sm} {
+                width: 100%;
+            }
+        }
+
+        .loadingArea {
+            margin-left: $space-1;
+            display: inline-block;
+
+            @media #{$breakpoint-down-sm} {
+                display: block;
+                text-align: center;
+                padding-top: $space-2;
+            }
+
+            .icon {
+                padding: $space-1 0;
+                color: white;
+                display: none;
+            }
+        }
+    }
+
+    .pickpUpTime {
+        display: flex;
+
+        label,
+        select {
+            flex: 33%;
+            display: flex;
+            align-items: center;
+        }
+
+        label {
+            color: #fff;
+        }
+    }
+}
+
