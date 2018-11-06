@@ -3,11 +3,13 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
+	 <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Web\Home\home.ts" />
   </ItemGroup>
+ 
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
