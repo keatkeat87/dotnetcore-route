@@ -61,6 +61,11 @@ allHtmlWebpacks.push(new HtmlWebpackPlugin({
     inject: false,
     filename: pathHelper.resolve(__dirname, 'Web/Shared/Index.cshtml')
 }));
+allHtmlWebpacks.push(new HtmlWebpackPlugin({
+    template: pathHelper.resolve(__dirname, 'Web/Shared/Amp/layout.cshtml'),
+    inject: false,
+    filename: pathHelper.resolve(__dirname, 'Web/Shared/Amp/Index.cshtml')
+}));
 
 
 module.exports = {
