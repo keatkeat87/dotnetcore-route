@@ -40,6 +40,8 @@ namespace Project.Web.Home
          
         public IActionResult Index([FromRoute] string language, [FromRoute] string amp)
         {
+            var x = Url.Action("Index", "AboutUsController", null, "https", "www.stooges.com.my");
+            
             var resultA = HtmlLocalizer["test {0} with params", "dada"];
             var value = resultA.Value; // 注意 :这里很奇葩的哦， 是翻译成功了，但是 dada 没有被放入 {0} 里面, 这个放入的动作是留给 razor view 执行的. 
             value = HtmlLocalizer.GetString("test {0} with params", "dada"); //用 GetString 就可以完全成功，我是不知道为什么啦 
