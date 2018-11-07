@@ -4,13 +4,8 @@
 
 
 @section Css{
-    <style  amp-custom>
-        <% for (var chunk in htmlWebpackPlugin.files.chunks) {
-            if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){
-                htmlWebpackPlugin .files.chunks[chunk].css.forEach(function(css){
-                    %><%= compilation.assets[css.split('/').pop()].source().replace(/@media \(/gi, '@@media (') %><%
-                }
-            )}}%>
+    <style amp-custom>
+        <% var media = '@@media[(]'.substring(1); var mediaRegex = new RegExp(media, 'ig');  var mediaWithSpace = '@@media [(]'.substring(1); var mediaWithSpaceRegex = new RegExp(mediaWithSpace, 'ig'); var keyframe = '@@keyframes '.substring(1);var keyframeRegex = new RegExp(keyframe, 'ig'); for (var chunk in htmlWebpackPlugin.files.chunks) { if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){ htmlWebpackPlugin .files.chunks[chunk].css.forEach(function(css){%><%= compilation.assets[css.split('/').pop()].source().replace(mediaRegex, '@@media(').replace(mediaWithSpaceRegex, '@@media (').replace(keyframeRegex, '@@keyframes ') %><%})}}%>
     </style>
 }
 
