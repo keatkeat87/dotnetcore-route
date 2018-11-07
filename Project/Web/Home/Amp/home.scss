@@ -1,12 +1,10 @@
-@import '../../../src/module/stooges-variables';
-@import '../../../src/scss/project-variables';
-@import '../../../src/module/stooges-mixin';
-@import '../../../src/scss/project-mixin';
-@import '../../../src/module/stooges-basscss';
-@import '../../../src/scss/project-basscss';
-@import '../../../node_modules/owl.carousel/dist/assets/owl.carousel.min.css';
 
 
+@media (max-width: 600px) {
+    body {
+        background-color: lightblue;
+    }
+}
 body{
     color:red;
 }body{

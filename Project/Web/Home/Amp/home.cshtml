@@ -4,11 +4,17 @@
 
 
 @section Css{
-    <style  amp-custom>
-        <% for (var chunk in htmlWebpackPlugin.files.chunks) {if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){htmlWebpackPlugin .files.chunks[chunk].css.forEach(function(css){%><%=compilation.assets[css.split('/').pop()].source()%><%})}}%>
-    </style>
+<style amp-custom>
+        <% for (var chunk in htmlWebpackPlugin.files.chunks) {if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){htmlWebpackPlugin.files.chunks[chunk].css.forEach(function(css){%><%=compilation.assets[css.split('/').pop()].source() %><%})}}%>
+</style>
 }
 
+@* 
+    
+console.log(p.replace(/@media\(/gi, '@@media(').replace(/@media\( /gi, '@@media( ')
+            .replace(/@keyframes /gi, '@@keyframes '));
 
+*@
+ 
 
 <h1>Hello AMP</h1>

@@ -1,6 +1,5 @@
 ﻿@using Newtonsoft.Json;
-@{
-}
+
 
 <!DOCTYPE html>
 <html>
@@ -15,8 +14,10 @@
 <body>
 
     <header>header</header>
-
+    view bag latout : @ViewBag.data;
     @RenderBody()
+    view bag latout after body : @ViewBag.data;
+
 
     <footer>footer</footer>
     @RenderSection("Scripts", required: false)
