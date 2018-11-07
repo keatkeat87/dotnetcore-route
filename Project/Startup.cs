@@ -19,6 +19,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Project.Module.Language;
 using Project.Module.Amp;
+using Project.Module.Email;
 
 namespace Project
 { 
@@ -42,12 +43,16 @@ namespace Project
 
 
             services.AddAmp();
+
+            services.Configure<EmailOptions>(Configuration.GetSection("Email"));
+            services.AddEmail();
+
             services.AddLanguage(options =>
             {
                 options.DefaultLanguage = new Language
                 {
-                    ISOCode = "zh-Hans",
-                    FriendlyISOCode = "中文"
+                    ISOCode = "en",
+                    FriendlyISOCode = "english"
                 };
                 options.SupportedLanguages = new List<Language> {
                     new Language {

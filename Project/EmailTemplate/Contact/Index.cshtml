@@ -1,0 +1,15 @@
+﻿@model Project.Email.Contact.ViewModel
+@using Microsoft.AspNetCore.Localization
+@using Microsoft.AspNetCore.Mvc.Localization
+@{
+    Layout = ViewBag.Layout;
+}
+
+@inject IViewLocalizer ViewLocalizer
+
+
+@ViewLocalizer.WithCulture(new System.Globalization.CultureInfo("zh-Hans"))["<p>test html with {0}</p>", "<div>123</div>"]
+<p>Name : @Model.name</p>
+<p>Email Address : @Model.email</p>
+<p>Subject : @Model.subject</p>
+<p style="white-space:pre-wrap">Enquiry Information : @Model.message</p>

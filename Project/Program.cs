@@ -7,6 +7,7 @@ using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Project.Module.Cloud;
 
 namespace Project
 {
@@ -19,6 +20,8 @@ namespace Project
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseUrls("http://192.168.1.152:61547")
+                .ConfigureSecretFromCloud(skipInDevelopmentMode: true)
                 .UseStartup<Startup>();
     }
 }

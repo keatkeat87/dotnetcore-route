@@ -4,10 +4,16 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>3.0</TypeScriptToolsVersion>
 	 <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
+	 <UserSecretsId>9e8ccfec-a1d8-490b-8015-7d9397abfa26</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="Web\Home\home.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="EmailTemplate\Contact\Index.cshtml" />
+    <None Include="EmailTemplate\Layout.cshtml" />
   </ItemGroup>
  
 

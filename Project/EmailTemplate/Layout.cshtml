@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Email</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700" rel="stylesheet">
+    <style>
+        .body {
+            background: #f8f8f8;
+            color: #4b4b4b;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 20px 10px;
+            font-family: 'Roboto', sans-serif;
+        }
+        img {
+            margin-bottom: 20px;
+        }
+
+        .content {
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 2px;
+            border: 1px solid #dfdfdf;
+            padding: 20px;
+        }
+
+        p {
+            margin: 0 0 20px;
+        }
+
+        a.button {
+            border-radius: 2px;
+            background: #2c99eb;
+            color: white !important;
+            padding: 8px 20px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 0 0 20px;
+        }
+
+            a:hover {
+                opacity: 0.8;
+            }
+
+        .line {
+            height: 1px;
+            background: #b5b5b5;
+            margin: 0 0 10px;
+            width: 100px;
+        }
+
+        .footer {
+            font-size: 14px;
+            color: #757575;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="body">
+        <div class="content">
+            <img src="~/content/images/logo180.png" height="80">
+            <div class="card">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+

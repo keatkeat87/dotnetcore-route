@@ -8,9 +8,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Project.Module.Email;
 using System.Globalization;
 using System.Threading;
-
+using System.Threading.Tasks;
 
 namespace Project.Web.Home
 {
@@ -21,26 +22,45 @@ namespace Project.Web.Home
         private readonly IHtmlLocalizer<HomeController> HtmlLocalizer;
         private readonly IStringLocalizer<HomeController> StringLocalizer;
         public readonly IHttpContextAccessor HttpContextAccessor;
-       
+        private readonly EmailService EmailService;
+
 
         public HomeController(
               //IStringLocalizer<HomeController> localizer,
               IHttpContextAccessor httpContextAccessor,
               IHtmlLocalizer<HomeController> htmlLocalizer,
-              IStringLocalizer<HomeController> stringLocalizer
+              IStringLocalizer<HomeController> stringLocalizer,
+              EmailService emailService
         )
         {
             //Localizer = localizer;
             HttpContextAccessor = httpContextAccessor;
             HtmlLocalizer = htmlLocalizer;
             StringLocalizer = stringLocalizer;
+            EmailService = emailService;
         }
 
         #endregion
          
-        public IActionResult Index([FromRoute] string language, [FromRoute] string amp)
+        public async Task<IActionResult> Index([FromRoute] string language, [FromRoute] string amp)
         {
-            var x = Url.Action("Index", "AboutUsController", null, "https", "www.stooges.com.my");
+            await EmailService.SendAsync(
+              recipients: "hengkeat87@gmail.com",
+              subject: "Best Way Website Enquiry",
+              templatePath: "~/EmailTemplate/Contact/Index.cshtml",
+              replyTos: "hengkeat87@gmail.com",
+              model: new Email.Contact.ViewModel
+              {
+                  email = "koocool@gmail.com",
+                  message = "msg",
+                  name = "keatkeat",
+                  subject = "test"
+              }
+              // attachs: model.fileFullPaths.Select(f => new Attachment(f)).ToList()
+           );
+
+
+            //var x = Url.Action("Index", "AboutUsController", null, "https", "www.stooges.com.my");
             
             var resultA = HtmlLocalizer["test {0} with params", "dada"];
             var value = resultA.Value; // 注意 :这里很奇葩的哦， 是翻译成功了，但是 dada 没有被放入 {0} 里面, 这个放入的动作是留给 razor view 执行的. 
