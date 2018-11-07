@@ -6,6 +6,7 @@
 @inject IHttpContextAccessor HttpContextAccessor
 @{
     var requestCulture = HttpContextAccessor.HttpContext.Features.Get<IRequestCultureFeature>();
+    ViewBag.robots = "noindex,nofollow";
 }
 
 @requestCulture.RequestCulture.Culture.Name
