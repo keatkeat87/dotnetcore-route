@@ -44,20 +44,24 @@ namespace Project.Web.Home
          
         public async Task<IActionResult> Index([FromRoute] string language, [FromRoute] string amp)
         {
-            await EmailService.SendAsync(
-              recipients: "hengkeat87@gmail.com",
-              subject: "Best Way Website Enquiry",
-              templatePath: "~/EmailTemplate/Contact/Index.cshtml",
-              replyTos: "hengkeat87@gmail.com",
-              model: new Email.Contact.ViewModel
-              {
-                  email = "koocool@gmail.com",
-                  message = "msg",
-                  name = "keatkeat",
-                  subject = "test"
-              }
-              // attachs: model.fileFullPaths.Select(f => new Attachment(f)).ToList()
-           );
+
+            var xx = ViewBag.data;
+            ViewBag.data = "controller value";
+
+           // await EmailService.SendAsync(
+           //   recipients: "hengkeat87@gmail.com",
+           //   subject: "Best Way Website Enquiry",
+           //   templatePath: "~/EmailTemplate/Contact/Index.cshtml",
+           //   replyTos: "hengkeat87@gmail.com",
+           //   model: new Email.Contact.ViewModel
+           //   {
+           //       email = "koocool@gmail.com",
+           //       message = "msg",
+           //       name = "keatkeat",
+           //       subject = "test"
+           //   }
+           //   // attachs: model.fileFullPaths.Select(f => new Attachment(f)).ToList()
+           //);
 
 
             //var x = Url.Action("Index", "AboutUsController", null, "https", "www.stooges.com.my");
