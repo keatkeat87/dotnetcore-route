@@ -4,14 +4,16 @@
 
 
 @section Css{
-    <style  amp-custom>
-        <% for (var chunk in htmlWebpackPlugin.files.chunks) {
-            if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){
-                htmlWebpackPlugin .files.chunks[chunk].css.forEach(function(css){
-                    %><%= compilation.assets[css.split('/').pop()].source().replace(/@media \(/gi, '@@media (') %><%
-                }
-            )}}%>
-    </style>
+<style amp-custom>
+    <% for (var chunk in htmlWebpackPlugin.files.chunks) {
+        if(chunk.split('~').indexOf(htmlWebpackPlugin.options.sName) !== -1){
+            var media = '@@media'.substring(1);
+            var mediaRegex = new RegExp(media, 'ig');
+            htmlWebpackPlugin .files.chunks[chunk].css.forEach(function(css){
+                %><%= compilation.assets[css.split('/').pop()].source().replace(mediaRegex, '@@media (') %><%
+            }
+        )}}%>
+</style>
 }
 
 @* 
